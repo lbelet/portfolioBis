@@ -9,6 +9,9 @@ document.querySelector('#app').innerHTML = `
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Mon Site</a>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="theme-switch">
+      </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,10 +30,6 @@ document.querySelector('#app').innerHTML = `
             <a class="nav-link" href="#">Contact me</a>
           </li>
         </ul>
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="theme-switch">
-          <label class="form-check-label" for="theme-switch">Mode Sombre</label>
-        </div>
       </div>
     </div>
   </nav>
@@ -94,7 +93,7 @@ function initThreeJS() {
     // const box = new THREE.Box3().setFromObject(model);
     // const boxHelper = new THREE.BoxHelper(model, 0xffff00);
     // scene.add(boxHelper);
-    
+
     // // Ajouter des axes pour visualiser l'orientation
     // const axesHelper = new THREE.AxesHelper(5);
     // scene.add(axesHelper);
@@ -103,11 +102,28 @@ function initThreeJS() {
     // const gridHelper = new THREE.GridHelper(10, 10);
     // scene.add(gridHelper);
 
+    function onWindowResize() {
+      // Mettre à jour la taille du canvas
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+  
+      // Mettre à jour la taille du rendu Three.js
+      renderer.setSize(window.innerWidth, window.innerHeight);
+  
+      // Mettre à jour le ratio de l'aspect de la caméra
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    }
+  
+    // Appeler la fonction de redimensionnement lorsque la fenêtre est redimensionnée
+    window.addEventListener('resize', onWindowResize);
+    onWindowResize();
+
   }, undefined, function (error) {
     console.error('Une erreur s\'est produite lors du chargement du modèle GLTF', error);
   });
 
-  canvas.addEventListener('click', function(event) {
+  canvas.addEventListener('click', function (event) {
     // Récupérer les coordonnées du clic par rapport à la fenêtre
     const x = event.clientX;
     const y = event.clientY;
@@ -132,16 +148,16 @@ function initThreeJS() {
   function animateCamera() {
     const start = { x: 0, y: 1.2, z: -1.2 }; // Position de départ de la caméra
     const end = { x: 0, y: 0.75, z: -4 }; // Position d'arrivée de la caméra
-  
+
     // Durée de l'animation (en millisecondes)
     const duration = 5000;
-  
+
     // Coefficient pour l'amplitude du mouvement vertical
     const amplitude = 0.04;
-  
+
     // Coefficient pour la vitesse du mouvement vertical
     const frequency = 10 * Math.PI / duration;
-  
+
     // Créer une nouvelle animation Tween.js
     new TWEEN.Tween(start)
       .to(end, duration)
@@ -152,10 +168,10 @@ function initThreeJS() {
       })
       .start(); // Démarrer l'animation
   }
-  
+
   // Lancer l'animation de la caméra
   const startTime = Date.now();
-  
+
 
   function animate() {
     requestAnimationFrame(animate);
