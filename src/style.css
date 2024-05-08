@@ -108,3 +108,18 @@ button:focus-visible {
   color: #343a40;
 }
 
+.canvas-container {
+  position: fixed;
+  top: 60px; 
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  overflow: hidden; /* Empêcher le débordement */
+}
+
+#main-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+

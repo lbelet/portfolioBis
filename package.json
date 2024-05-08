@@ -12,6 +12,9 @@
     "vite": "^5.2.0"
   },
   "dependencies": {
-    "bootstrap": "^5.3.3"
+    "@tweenjs/tween.js": "^23.1.2",
+    "bootstrap": "^5.3.3",
+    "three": "^0.164.1",
+    "tween.js": "^16.6.0"
   }
 }
