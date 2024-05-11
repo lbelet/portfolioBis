@@ -60,8 +60,9 @@ themeSwitch.addEventListener('change', function () {
 
 initThreeJS();
 
-// Fonction d'initialisation de la scène Three.js
 function initThreeJS() {
+  const initialIntensity = 1;
+
   const scene = new THREE.Scene();
   const canvasContainer = document.querySelector('.canvas-container');
   const canvas = document.createElement('canvas');
@@ -75,67 +76,41 @@ function initThreeJS() {
   camera.position.set(0, 1, -1.2);
 
   const directionalLight = new THREE.AmbientLight(0xffffff, 1);
-  directionalLight.position.set(0, 4, 0); // Position de la lumière directionnelle
+  directionalLight.position.set(0, 4, 0);
   scene.add(directionalLight);
 
-  // Initialiser le chargeur de modèle GLTF
   const loader = new GLTFLoader();
 
-  // Charger le modèle GLTF
-  loader.load('../assets/privateDev.gltf', function (gltf) {
+  loader.load('../assets/3d/privateDev.gltf', function (gltf) {
     const model = gltf.scene;
-    // model.position.set(0, 0, 0)
     model.scale.set(3, 3, 3)
 
-    // Ajouter le modèle à la scène
     scene.add(model);
 
-    // const box = new THREE.Box3().setFromObject(model);
-    // const boxHelper = new THREE.BoxHelper(model, 0xffff00);
-    // scene.add(boxHelper);
-
-    // // Ajouter des axes pour visualiser l'orientation
-    // const axesHelper = new THREE.AxesHelper(5);
-    // scene.add(axesHelper);
-
-    // // Ajouter une grille pour visualiser la position
-    // const gridHelper = new THREE.GridHelper(10, 10);
-    // scene.add(gridHelper);
-
     function onWindowResize() {
-      // Mettre à jour la taille du canvas
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-  
-      // Mettre à jour la taille du rendu Three.js
+
       renderer.setSize(window.innerWidth, window.innerHeight);
-  
-      // Mettre à jour le ratio de l'aspect de la caméra
+
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
     }
-  
-    // Appeler la fonction de redimensionnement lorsque la fenêtre est redimensionnée
     window.addEventListener('resize', onWindowResize);
     onWindowResize();
-
   }, undefined, function (error) {
     console.error('Une erreur s\'est produite lors du chargement du modèle GLTF', error);
   });
 
   canvas.addEventListener('click', function (event) {
-    // Récupérer les coordonnées du clic par rapport à la fenêtre
     const x = event.clientX;
     const y = event.clientY;
 
-    // Convertir les coordonnées du clic en coordonnées de la scène Three.js
     const rect = canvas.getBoundingClientRect();
     const mouseX = (x - rect.left) / canvas.clientWidth * 2 - 1;
     const mouseY = -(y - rect.top) / canvas.clientHeight * 2 + 1.7;
 
-    // Vérifier si les coordonnées du clic sont dans la zone spécifiée
     if ((mouseX >= -0.1 && mouseX <= 0.1) && (mouseY >= 0.3 && mouseY <= 0.7)) {
-      // Démarrer l'animation de la caméra si elle n'a pas encore commencé
       if (!animationStarted) {
         animateCamera();
         animationStarted = true;
@@ -143,41 +118,45 @@ function initThreeJS() {
     }
   });
 
-  let animationStarted = false; // Variable pour suivre si l'animation a démarré
+  let animationStarted = false;
 
   function animateCamera() {
-    const start = { x: 0, y: 1.2, z: -1.2 }; // Position de départ de la caméra
-    const end = { x: 0, y: 0.75, z: -4 }; // Position d'arrivée de la caméra
+    const start = { x: 0, y: 1.2, z: -1.2 };
+    const end = { x: 0, y: 0.75, z: -4 };
 
-    // Durée de l'animation (en millisecondes)
     const duration = 5000;
 
-    // Coefficient pour l'amplitude du mouvement vertical
     const amplitude = 0.04;
 
-    // Coefficient pour la vitesse du mouvement vertical
     const frequency = 10 * Math.PI / duration;
 
-    // Créer une nouvelle animation Tween.js
-    new TWEEN.Tween(start)
+    const tween = new TWEEN.Tween(start)
       .to(end, duration)
       .onUpdate(() => {
-        // Ajuster la position verticale de la caméra avec une fonction périodique
         const offsetY = Math.sin((Date.now() - startTime) * frequency) * amplitude;
         camera.position.set(start.x, start.y + offsetY, start.z);
       })
-      .start(); // Démarrer l'animation
+      .onComplete(() => {
+        console.log("animation completed");
+        const initialIntensity = directionalLight.intensity;
+        const targetIntensity = 0;
+        const transitionDuration = 1000;
+        new TWEEN.Tween({ intensity: initialIntensity })
+          .to({ intensity: targetIntensity }, transitionDuration)
+          .onUpdate((obj) => {
+            directionalLight.intensity = obj.intensity;
+          })
+          .start();
+      })
+      .start();
   }
 
-  // Lancer l'animation de la caméra
   const startTime = Date.now();
-
 
   function animate() {
     requestAnimationFrame(animate);
-    TWEEN.update(); // Mettre à jour l'animation de Tween.js
+    TWEEN.update();
     renderer.render(scene, camera);
   }
-
   animate();
 }
