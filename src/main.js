@@ -1,6 +1,6 @@
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as TWEEN from '@tweenjs/tween.js';
@@ -87,6 +87,15 @@ function initThreeJS() {
 
     scene.add(model);
 
+    // loader.load('../assets/3d/privateDev2.gltf', function (gltf) {
+    //   const model = gltf.scene;
+    //   model.scale.set(3, 3, 3);
+    //   model.position.set(0, 0, 0);
+    //   scene.add(model);
+    // }, undefined, function (error) {
+    //   console.error('Une erreur s\'est produite lors du chargement du modèle GLTF', error);
+    // });
+
     function onWindowResize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -146,10 +155,35 @@ function initThreeJS() {
           .onUpdate((obj) => {
             directionalLight.intensity = obj.intensity;
           })
+          .onComplete(() => {
+            // Charger le deuxième modèle GLTF
+            loader.load('../assets/3d/privateDev2.gltf', function (gltf) {
+              const model = gltf.scene;
+              model.scale.set(3, 3, 3);
+              model.position.set(0, 0, 0);
+              scene.add(model);
+
+              // Déplacer la caméra à la nouvelle position
+              // const cameraEndPosition = { x: 0, y: 1.2, z: -5 };
+              // const cameraMoveDuration = 2000; // Durée du déplacement de la caméra en millisecondes
+
+              camera.position.set(0, 1.2, -5);
+
+              // new TWEEN.Tween(camera.position)
+              //   .to(cameraEndPosition, cameraMoveDuration)
+              //   .start();
+
+              // Réinitialiser l'intensité de la lumière
+              directionalLight.intensity = 1;
+            }, undefined, function (error) {
+              console.error('Une erreur s\'est produite lors du chargement du modèle GLTF', error);
+            });
+          })
           .start();
       })
       .start();
   }
+
 
   const startTime = Date.now();
 
