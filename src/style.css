@@ -114,7 +114,7 @@ button:focus-visible {
   bottom: 60px;
   left: 0;
   right: 0;
-  overflow: hidden; /* Empêcher le débordement */
+  overflow: hidden;
 }
 
 #main-canvas {
