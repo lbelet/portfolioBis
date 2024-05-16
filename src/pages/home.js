@@ -1,6 +1,10 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as TWEEN from '@tweenjs/tween.js';
+import loadMenu from './menu';
+
+let animationFrameId;
+let animationStarted = false;
 
 const loadHome = (main) => {
     main.innerHTML = `
@@ -9,12 +13,10 @@ const loadHome = (main) => {
     `;
 
     initThreeJS();
-
 };
 
-// initThreeJS();
-
 function initThreeJS() {
+    animationStarted = true; // Ensure animation starts
     const initialIntensity = 1;
 
     const scene = new THREE.Scene();
@@ -37,16 +39,12 @@ function initThreeJS() {
 
     loader.load('../../assets/3d/privateDev.gltf', function (gltf) {
         const model = gltf.scene;
-        model.scale.set(3, 3, 3)
-
+        model.scale.set(3, 3, 3);
         scene.add(model);
 
         function onWindowResize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
+            if (!animationStarted) return;
             renderer.setSize(window.innerWidth, window.innerHeight);
-
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
         }
@@ -57,6 +55,8 @@ function initThreeJS() {
     });
 
     canvas.addEventListener('click', function (event) {
+        if (!animationStarted) return;
+        
         const x = event.clientX;
         const y = event.clientY;
 
@@ -65,69 +65,66 @@ function initThreeJS() {
         const mouseY = -(y - rect.top) / canvas.clientHeight * 2 + 1.7;
 
         if ((mouseX >= -0.1 && mouseX <= 0.1) && (mouseY >= 0.3 && mouseY <= 0.7)) {
-            if (!animationStarted) {
-                animateCamera();
-                animationStarted = true;
-            }
+            if (!animationStarted) return;
+            animateCamera();
         }
     });
 
-    let animationStarted = false;
+    const startTime = Date.now();
+
+    function animate() {
+        if (!animationStarted) return;
+        TWEEN.update();
+        renderer.render(scene, camera);
+        animationFrameId = requestAnimationFrame(animate);
+    }
+    animate();
 
     function animateCamera() {
+        if (!animationStarted) return;
+
+        console.log("animation started")
+        
         const start = { x: 0, y: 1.2, z: -1.2 };
         const end = { x: 0, y: 0.75, z: -4 };
 
         const duration = 5000;
-
         const amplitude = 0.04;
-
         const frequency = 10 * Math.PI / duration;
 
         const tween = new TWEEN.Tween(start)
             .to(end, duration)
             .onUpdate(() => {
+                if (!animationStarted) return;
                 const offsetY = Math.sin((Date.now() - startTime) * frequency) * amplitude;
                 camera.position.set(start.x, start.y + offsetY, start.z);
             })
             .onComplete(() => {
-                console.log("animation completed");
+                if (!animationStarted) return;
+                console.log("Animation completed");
                 const initialIntensity = directionalLight.intensity;
                 const targetIntensity = 0;
                 const transitionDuration = 1000;
                 new TWEEN.Tween({ intensity: initialIntensity })
                     .to({ intensity: targetIntensity }, transitionDuration)
                     .onUpdate((obj) => {
+                        if (!animationStarted) return;
                         directionalLight.intensity = obj.intensity;
                     })
                     .onComplete(() => {
-                        loader.load('../../assets/3d/privateDev2.gltf', function (gltf) {
-                            const model = gltf.scene;
-                            model.scale.set(3, 3, 3);
-                            model.position.set(0, 0, 0);
-                            scene.add(model);
-
-                            camera.position.set(0, 1.2, -5);
-
-                            directionalLight.intensity = 1;
-                        }, undefined, function (error) {
-                            console.error('Une erreur s\'est produite lors du chargement du modèle GLTF', error);
-                        });
+                        if (!animationStarted) return;
+                        const mainContent = document.getElementById('main-content');
+                        loadMenu(mainContent);
                     })
                     .start();
             })
             .start();
     }
-
-
-    const startTime = Date.now();
-
-    function animate() {
-        requestAnimationFrame(animate);
-        TWEEN.update();
-        renderer.render(scene, camera);
-    }
-    animate();
 }
 
-export default loadHome;
+function stopAnimation() {
+    console.log("animation stopped")
+    animationStarted = false;
+}
+
+export { loadHome, stopAnimation };

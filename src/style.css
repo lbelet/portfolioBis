@@ -1,4 +1,3 @@
-
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -110,7 +109,7 @@ button:focus-visible {
 
 .canvas-container {
   position: fixed;
-  top: 60px; 
+  top: 60px;
   bottom: 60px;
   left: 0;
   right: 0;
@@ -122,4 +121,40 @@ button:focus-visible {
   height: 100%;
 }
 
+#main-content {
+  width: 100%;
+  height: 100%;
+}
 
+.main-container {
+  background-color: black;
+  color: white;
+  padding: 20px 0; /* Padding en haut et en bas pour centrer verticalement */
+  text-align: center;
+  height: calc(100vh - 120px); /* Ajustez en fonction de la hauteur de votre navbar et footer */
+  width: 100%; /* Utilise toute la largeur */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Centre les éléments verticalement et horizontalement */
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Assure que les images sont centrées verticalement et horizontalement */
+  gap: 50px; /* Espace entre les images */
+  width: 100%; /* Utilise toute la largeur */
+}
+
+.menu-image {
+  max-height: 70vh; /* Limite la hauteur des images pour s'adapter au conteneur */
+  width: auto; /* Maintient le ratio d'aspect des images */
+  object-fit: contain; /* Assure que tout de l'image est visible sans déformation */
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu-image:hover {
+  transform: scale(1.02); /* Effet de légère augmentation au survol */
+}
