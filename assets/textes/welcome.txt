@@ -1,0 +1,4 @@
+Bonjour, je m'appelle Laurent. Je suis un créateur de solutions numériques.
+Formé au développement web et logiciel à l'école 42 de Lausanne, ma curiosité naturelle me pousse à explorer les possibilités infinies du code. En plus de mon expertise en développement, je suis passionné par la modélisation et l'animation 3D avec Blender.
+En dehors du développement logiciel et web, je m'intéresse particulièrement à l'OSINT (Open Source Intelligence). J'explore diverses techniques et outils pour collecter et analyser des informations provenant de sources ouvertes.
+Explorez mon travail et découvrez comment mes compétences polyvalentes peuvent apporter des solutions uniques et efficaces à vos besoins.

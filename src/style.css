@@ -1,160 +1,76 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-
-/* Styles pour le footer en mode sombre */
-.footer-dark {
-  background-color: #343a40;
-  color: #f8f9fa;
-}
-
-/* Styles pour le footer en mode clair */
-.footer-light {
-  background-color: #f8f9fa;
-  color: #343a40;
-}
-
-.canvas-container {
-  position: fixed;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-}
-
-#main-canvas {
-  width: 100%;
-  height: 100%;
-}
-
 #main-content {
-  width: 100%;
-  height: 100%;
-}
-
-.main-container {
-  background-color: black;
-  color: white;
-  padding: 20px 0; /* Padding en haut et en bas pour centrer verticalement */
-  text-align: center;
-  height: calc(100vh - 120px); /* Ajustez en fonction de la hauteur de votre navbar et footer */
-  width: 100%; /* Utilise toute la largeur */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center; /* Centre les éléments verticalement et horizontalement */
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
-.image-container {
+.container-fluid {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  flex: 1;
+}
+
+.section {
+  flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center; /* Assure que les images sont centrées verticalement et horizontalement */
-  gap: 50px; /* Espace entre les images */
-  width: 100%; /* Utilise toute la largeur */
+  align-items: center;
 }
 
-.menu-image {
-  max-height: 70vh; /* Limite la hauteur des images pour s'adapter au conteneur */
-  width: auto; /* Maintient le ratio d'aspect des images */
-  object-fit: contain; /* Assure que tout de l'image est visible sans déformation */
-  cursor: pointer;
-  transition: transform 0.3s ease;
+.section-4 {
+  background-color: #E0E0E0;
 }
 
-.menu-image:hover {
-  transform: scale(1.02); /* Effet de légère augmentation au survol */
+.section-5 {
+  background-color: #BBDEFB;
+}
+
+.navbar {
+  /* border-radius: 0 0 15px 15px; */
+}
+
+.footer {
+  /* border-radius: 15px 15px 0 0; */
+}
+
+.skills-image {
+  max-width: 100%;
+  max-height: 70vh; /* Ensure the image does not exceed 80% of the viewport height */
+  height: auto;
+  width: auto;
+  object-fit: contain; /* Ensure the image scales correctly without distorting */
+}
+
+/* Add this to your styles.css file or inside a <style> tag in your HTML */
+.carousel-control-prev, .carousel-control-next {
+  width: 90%; /* Adjust this value as needed to control the spacing */
+}
+
+.carousel {
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-inner {
+  width: 100%;
+  height: 100%;
 }

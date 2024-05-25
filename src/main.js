@@ -1,9 +1,11 @@
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import { loadHome, stopAnimation } from './pages/home.js';
+import 'bootstrap';
+// import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import loadHome from './pages/home.js';
 import loadMenu from './pages/menu.js';
 import loadSkills from './pages/skills.js';
+import loadWork from './pages/work';
 
 document.addEventListener('DOMContentLoaded', () => {
   const themeSwitch = document.querySelector('#theme-switch');
@@ -28,13 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('nav-home')?.addEventListener('click', () => loadHome(mainContent));
   document.getElementById('nav-menu')?.addEventListener('click', () => loadMenu(mainContent));
-  document.getElementById('nav-skills')?.addEventListener('click', () => {
-    stopAnimation();
-    loadSkills(mainContent);
-  });
+  document.getElementById('nav-skills')?.addEventListener('click', () => loadSkills(mainContent));
+  document.getElementById('nav-work')?.addEventListener('click', () => loadWork(mainContent));
 
   // Load the home page by default
-  stopAnimation();
   loadHome(mainContent);
 });
-
