@@ -74,3 +74,56 @@ body {
   width: 100%;
   height: 100%;
 }
+
+.dev-background {
+  background-color: #ffc4c4; /* Couleur pour Dev */
+}
+
+.three-d-background {
+  background-color: #ffc4c4; /* Couleur pour 3D */
+}
+
+.selected {
+  border: 2px solid #000; /* Exemple de style supplémentaire pour la sélection */
+  background-color: aqua;
+}
+
+.carousel-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.carousel-image.mb-2 {
+  max-height: 200px; /* Ajustez la taille selon vos besoins */
+}
+
+.carousel-image.m-2 {
+  max-height: 100px; /* Ajustez la taille selon vos besoins */
+}
+
+#modalImage {
+  width: 100%; /* Assurez-vous que l'image prend toute la largeur de la modale */
+  height: auto; /* Maintenez l'aspect ratio */
+}
+
+/* Classes pour la réactivité */
+@media (max-width: 768px) {
+    .carousel-image.mb-2 {
+        max-height: 150px; /* Réduisez la taille pour les petits écrans */
+    }
+    .carousel-image.m-2 {
+        max-height: 80px; /* Réduisez la taille pour les petits écrans */
+    }
+
+    .custom-prev {
+        left: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
+    }
+
+    .custom-next {
+        right: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
+    }
+
+    .carousel-indicators {
+        bottom: -10px; /* Ajustez cette valeur pour descendre les indicateurs sur les petits écrans */
+    }
+}
