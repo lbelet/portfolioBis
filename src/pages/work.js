@@ -108,14 +108,32 @@ const loadCarouselContent = async (type) => {
         content = `
             <div class="carousel-item active">
                 <div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 100%;">
-                    <h3 class="mb-3">3D Project 1</h3>
-                    <p class="px-3">Description of 3D Project 1</p>
+                    <h3 class="mb-3">Siren Head - CameraTracking et Animation 3D</h3>
+                    <div class="d-flex flex-column justify-content-center align-items-center mb-3">
+                        <div class="ratio ratio-16x9 mb-2">
+                            <iframe src="https://www.youtube.com/embed/eWnWZhQvrhU" title="YouTube video" allowfullscreen></iframe>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <img src="../../assets/images/sirenhead/sirenHead.gif" alt="SirenHead animation" class="carousel-image img-fluid m-2" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="../../assets/images/sirenhead/sirenHead.gif">
+                            <img src="../../assets/images/sirenhead/sirenHeadWireframe.PNG" alt="SirenHead Wireframe" class="carousel-image img-fluid m-2" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="../../assets/images/sirenhead/sirenHeadWireframe.PNG">
+                        </div>
+                    </div>
+                    <p class="px-3">Pour ce projet, j'utilise Blender et Mixamo pour modéliser, rigguer, et animer personnage en 3D, intégré dans un environnement réel. Le camera tracking assure un alignement précis et réaliste du personnage dans la vidéo. Ce projet met en avant les compétences techniques en animation 3D et en effets visuels.</p>
                 </div>
             </div>
             <div class="carousel-item">
                 <div class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 100%;">
-                    <h3 class="mb-3">3D Project 2</h3>
-                    <p class="px-3">Description of 3D Project 2</p>
+                <h3 class="mb-3">The hole - CameraTracking et incrustation 3D</h3>
+                <div class="d-flex flex-column justify-content-center align-items-center mb-3">
+                    <div class="ratio ratio-16x9 mb-2">
+                        <iframe src="https://www.youtube.com/embed/zxplWbsfAgE" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <img src="../../assets/images/trou/trou.gif" alt="Hole animation" class="carousel-image img-fluid m-2" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="../../assets/images/trou/trou.gif">
+                        <img src="../../assets/images/trou/trouWireframe.PNG" alt="Hole Wireframe" class="carousel-image img-fluid m-2" data-bs-toggle="modal" data-bs-target="#imageModal" data-src="../../assets/images/trou/trouWireframe.PNG">
+                    </div>
+                </div>
+                    <p class="px-3">J'utilise Blender pour modéliser et intégrer une doline dans une vidéo réelle. Grâce au camera tracking et à des matériaux réalistes, le projet simule de manière convaincante un trou dans la chaussée. L'objectif est de démontrer les compétences en modélisation 3D et en intégration d'effets visuels pour créer une scène immersive et réaliste.</p>
                 </div>
             </div>
             <div class="carousel-item">

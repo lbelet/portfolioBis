@@ -54,7 +54,7 @@ body {
 
 .skills-image {
   max-width: 100%;
-  max-height: 70vh; /* Ensure the image does not exceed 80% of the viewport height */
+  max-height: 70vh; /* Ensure the image does not exceed 70% of the viewport height */
   height: auto;
   width: auto;
   object-fit: contain; /* Ensure the image scales correctly without distorting */
@@ -104,26 +104,61 @@ body {
 #modalImage {
   width: 100%; /* Assurez-vous que l'image prend toute la largeur de la modale */
   height: auto; /* Maintenez l'aspect ratio */
+  max-height: 70vh; /* Limite la hauteur maximale à 70% de la hauteur de la fenêtre */
+  object-fit: contain; /* S'assure que l'image s'adapte sans être coupée */
+}
+
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  min-height: calc(100% - 1rem);
+}
+
+.modal-content {
+  max-height: calc(100vh - 1rem);
+  overflow: hidden;
+}
+
+.modal-body {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 80vh; /* Ajout pour limiter la hauteur du contenu de la modale */
+}
+
+/* Espacement personnalisé pour les boutons "prev" et "next" */
+.custom-prev {
+  left: -5%; /* Ajustez cette valeur pour espacer davantage */
+}
+
+.custom-next {
+  right: -5%; /* Ajustez cette valeur pour espacer davantage */
+}
+
+/* Position des indicateurs plus bas */
+.carousel-indicators {
+  bottom: -20px; /* Ajustez cette valeur pour descendre les indicateurs */
 }
 
 /* Classes pour la réactivité */
 @media (max-width: 768px) {
-    .carousel-image.mb-2 {
-        max-height: 150px; /* Réduisez la taille pour les petits écrans */
-    }
-    .carousel-image.m-2 {
-        max-height: 80px; /* Réduisez la taille pour les petits écrans */
-    }
+  .carousel-image.mb-2 {
+      max-height: 150px; /* Réduisez la taille pour les petits écrans */
+  }
+  .carousel-image.m-2 {
+      max-height: 80px; /* Réduisez la taille pour les petits écrans */
+  }
 
-    .custom-prev {
-        left: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
-    }
+  .custom-prev {
+      left: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
+  }
 
-    .custom-next {
-        right: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
-    }
+  .custom-next {
+      right: -2%; /* Ajustez cette valeur pour espacer davantage sur les petits écrans */
+  }
 
-    .carousel-indicators {
-        bottom: -10px; /* Ajustez cette valeur pour descendre les indicateurs sur les petits écrans */
-    }
+  .carousel-indicators {
+      bottom: -10px; /* Ajustez cette valeur pour descendre les indicateurs sur les petits écrans */
+  }
 }
